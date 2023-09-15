@@ -35,6 +35,9 @@ public class PeliculasControllers {
 
     @GetMapping("/verPeliculas/{limite}")
     ResponseEntity<List<Pelicula>> filterPeliculas(@PathVariable String limite){
+        if(!limite.equals("Menor_edad") &&!limite.equals("Mayor")&& !limite.equals("Adolescentes")){
+            return ResponseEntity.badRequest().build();
+        }
         try{
             return ResponseEntity.ok(this.peliculasServices.filterPeliculas(limite));
         }catch (Exception ex){
